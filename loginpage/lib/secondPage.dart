@@ -161,7 +161,7 @@ class SecondPageState extends State<SecondPage> {
           const Text("All Orders", style: TextStyle(color: Colors.black
             , fontSize: 30,),),
           showContainer(context, 200),
-          SizedBox(height: 10,),
+          SizedBox(height: 10,),  // give space
           showContainer(context, 2),
 
         ],
