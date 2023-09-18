@@ -145,7 +145,6 @@ class SecondPageState extends State<SecondPage> {
         ),
       ),
     );
-
   }
   @override
   Widget build(BuildContext context) {
@@ -163,7 +162,6 @@ class SecondPageState extends State<SecondPage> {
           showContainer(context, 200),
           SizedBox(height: 10,),  // give space
           showContainer(context, 2),
-
         ],
       ),
     );
