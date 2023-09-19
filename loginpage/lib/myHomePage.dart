@@ -39,7 +39,7 @@ class HomeState extends State<MyHomePage>{
                 height: size.height/2.5,
                 width: size.width/1.1,
                 decoration: BoxDecoration(
-                    color: Colors.grey,
+                    color: Colors.blue,
                     borderRadius: BorderRadius.circular(30)
                 ),
                 child: Column(
@@ -47,7 +47,7 @@ class HomeState extends State<MyHomePage>{
                   children: [
                     const SizedBox(height: 20,),
                     const Padding(padding: EdgeInsets.only(left: 25,top: 15),
-                        child: Text("Sign in",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),)),
+                        child: Text("Sign in",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),)),
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Container(
@@ -57,7 +57,7 @@ class HomeState extends State<MyHomePage>{
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(20)
                           ),
-                          child: const Center(child: Text("Email",style: TextStyle(color: Colors.brown,fontSize: 12),))
+                          child: const Center(child: Text("Email",style: TextStyle(color: Colors.brown,fontSize: 18),))
                       ),
                     ),
                     Padding(
@@ -69,7 +69,7 @@ class HomeState extends State<MyHomePage>{
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(20)
                           ),
-                          child: const Center(child: Text("Password",style: TextStyle(color: Colors.brown,fontSize: 12),))
+                          child: const Center(child: Text("Password",style: TextStyle(color: Colors.brown,fontSize: 18),))
                       ),
                     ),
                     const SizedBox(height: 20,),
@@ -78,21 +78,21 @@ class HomeState extends State<MyHomePage>{
                       children: [
                         GestureDetector(
                           onTap: (){
-              Navigator.of(context).push(
-              MaterialPageRoute(
-              builder: (context) =>  SecondPage(),
-              ),
-              );
+                            Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) =>  SecondPage(),
+                           ),
+                            );
 
-              },
+                          },
                           child: Container(
                             height: 50,
-                            width: 120,
+                            width: 140,
                             decoration: BoxDecoration(
                                 color: Colors.orange,
                                 borderRadius: BorderRadius.circular(20)
                             ),
-                            child: const Center(child: Text("Signin",style: TextStyle(fontSize: 13,color: Colors.white), )),
+                            child: const Center(child: Text("Signin",style: TextStyle(fontSize: 25,color: Colors.white,fontWeight: FontWeight.bold), )),
                           ),
                         ),
                       ],

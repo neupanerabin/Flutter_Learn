@@ -27,8 +27,13 @@ class SecondPageState extends State<SecondPage> {
               // width: size.width/1.0,
               height: 60, // order id accepted id height
               padding: const EdgeInsets.only(left: 35, right: 35,bottom: 0),
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(14),
-                color: Colors.green,
+              decoration: const BoxDecoration(
+                  color: Colors.orangeAccent,
+
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20)
+                  )
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,  // space give in order and accepted
@@ -111,7 +116,7 @@ class SecondPageState extends State<SecondPage> {
                 Container(
                   width: size.width/3,
                   decoration: const BoxDecoration(
-                      color: Colors.red,
+                      color: Colors.teal ,
 
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(20),
@@ -119,20 +124,19 @@ class SecondPageState extends State<SecondPage> {
                       )
                   ),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.check_box_outline_blank, color: Colors.black, size: 20,),  // Icos add
-                          Text(" Total ", style: TextStyle(color:Colors.black ,fontSize: 20, fontWeight: FontWeight.bold),),
+                          Icon(Icons.check_box_outline_blank, color: Colors.white, size: 20,),  // Icos add
+                          Text(" Total ", style: TextStyle(color:Colors.white ,fontSize: 20, fontWeight: FontWeight.bold),),
                         ],
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.currency_rupee_outlined),
-                          Text("200.00", style: TextStyle(color: Colors.black, fontSize: 20,fontWeight: FontWeight.bold ),)
+                          Icon(Icons.currency_rupee_outlined, color:Colors.white),
+                          Text("200.00", style: TextStyle(color: Colors.white, fontSize: 20,fontWeight: FontWeight.bold ),)
 
                         ],
                       )
@@ -145,6 +149,7 @@ class SecondPageState extends State<SecondPage> {
         ),
       ),
     );
+    // to creeate list view
   }
   @override
   Widget build(BuildContext context) {
@@ -155,13 +160,27 @@ class SecondPageState extends State<SecondPage> {
 
       ),
       backgroundColor: Colors.blue,
-      body: Column(
+      body: Column( //To show the data in list in list items
         children: [
-          const Text("All Orders", style: TextStyle(color: Colors.black
-            , fontSize: 30,),),
-          showContainer(context, 200),
-          SizedBox(height: 10,),  // give space
-          showContainer(context, 2),
+          Padding(
+            padding: const EdgeInsets.only(left: 60),
+            child: const Text("All Orders", style: TextStyle(color: Colors.white
+              , fontSize: 40,fontWeight: FontWeight.bold),
+            ),
+          ),
+          // list view
+          SingleChildScrollView(
+            child: Container(
+              height: size.height/1.3,
+              child: ListView.builder(
+                itemCount: 10,
+                // scrollDirection: Axis.horizontal,   // view the horizontal in the output
+                itemBuilder: (BuildContext context, int index){
+                  return showContainer(context, index);
+                }
+              ),
+            ),
+          ),
         ],
       ),
     );
