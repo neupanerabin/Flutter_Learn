@@ -137,7 +137,6 @@ class SecondPageState extends State<SecondPage> {
                         children: [
                           Icon(Icons.currency_rupee_outlined, color:Colors.white),
                           Text("200.00", style: TextStyle(color: Colors.white, fontSize: 20,fontWeight: FontWeight.bold ),)
-
                         ],
                       )
                     ],
