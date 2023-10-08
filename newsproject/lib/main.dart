@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newsproject/pages/dashboard.dart';
+import 'package:newsproject/pages/loginpage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,11 +16,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'news project',
       theme: ThemeData(
-
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        primarySwatch: Colors.blue,
       ),
-      home: Dashboard(),  // Call class Dashboard from another dashboard page
+      home: loginpage(),  // Call class Dashboard from another dashboard page
     );
   }
 }

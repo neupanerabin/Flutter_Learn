@@ -1,117 +1,133 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
-import '../static.dart';
+// ignore_for_file: non_constant_identifier_names
+
+import 'package:flutter/material.dart';
+import 'package:newsproject/model/newsdata.dart';
+import 'package:newsproject/static.dart';
 
 class CardModules {
-  static Widget Cards(var size, String title, String date, imageurl) {
+  static Widget Cards(var size,String title, date, imageurl) {
+    return   Container(
+      height: size.height/5,
+      width: size.width/2,
+      child: Stack(
+        children: [
+
+          Container(
+            height: size.height/5,
+            width: size.width/2,
+            margin: const EdgeInsets.only(left: 15,right: 0),
+            decoration: BoxDecoration(color: Colors.grey,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.network(imageurl
+                  ,fit: BoxFit.cover),
+            ),
+
+          ),
+
+          Positioned(
+            left: 25,
+            bottom: 30,
+            child:  Container(
+              width: 180,
+              child:  Text(title,
+                style: const TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold),maxLines: 2,),
+            ),
+          ),
+
+          Positioned(
+            left: 25,
+            bottom: 8,
+            child:  Container(
+              width: 200,
+              child:  Text(date,
+                style: const TextStyle(color: Colors.white,fontSize: 12,fontWeight: FontWeight.normal),maxLines: 1,),
+            ),
+          ),
+
+          const Positioned(
+              right: 25,
+              bottom: 5,
+              child: Icon(Icons.play_circle_fill,color: Colors.white,))
+
+        ],
+      ),
+    );
+  }
+
+  static Widget CardTitle (var size,String txt){
+    return  Container(
+        width: size.width/2,
+        margin: const EdgeInsets.only(left: 15),
+        child: Text(txt,
+          style: StaticValues.headernews,
+          overflow: TextOverflow.visible,maxLines: 2,));
+  }
+
+  static Widget VideoCard(String imgurl){
     return Stack(
       children: [
         Container(
-          height: size.height / 5,  // height to container
-          width: size.width / 2,
-          // width to container
-          margin:  EdgeInsets.only(left: 15, right: 15),
-          // margin to container
-          decoration: BoxDecoration(
-            // decoration to the container
-            color: Colors.grey, // color used
-            borderRadius:
-                BorderRadius.circular(30), // make rounded shape to whole box
+          height: 120,
+          width: 150,
+          margin: const EdgeInsets.only(left: 15,right: 0),
+          decoration: BoxDecoration(color: Colors.grey,
+            borderRadius: BorderRadius.circular(20),
           ),
           child: ClipRRect(
-            // used to decorate the image
             borderRadius: BorderRadius.circular(20),
-            // make rounded shape to image only
-            child: Image.network(
-              imageurl,
-              fit: BoxFit.cover,
-            ),
+            child: Image.network(imgurl ?? StaticValues.defaultimg
+                ,fit: BoxFit.cover),
           ),
+
         ),
-        Positioned(
-          // used to maintain  tilte
-          left: 25,
-          bottom: 25,
-          child: Container(
-            width: 200,
-            child: Text(
-              title,      // title call here
-              style: TextStyle (
-                color: Colors.white,
-                fontSize: 19,
-                fontWeight: FontWeight.bold,
-              ),
-              maxLines: 2,
-            ),
-          ),
-        ),
-        Positioned(
-          // used to positioned date
-          left: 25,
-          bottom: 5,
-          child: Container(
-            width: 200,
-            child: Text(
-              date,       // Call date on here
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
-              ),
-              maxLines: 2,
-            ),
-          ),
-        ),
-         Positioned(   // Used to positioned play icon
-          right: 25,
-          bottom: 8,
-          child: Icon(
-            Icons.play_circle_fill,
-            color: Colors.white,
-            size: 38,
-          ),
-        ),
+        const Positioned(
+            top: 40,
+            left: 70,
+            child: Icon(Icons.play_circle_fill,color: Colors.white,size: 40,))
       ],
     );
   }
 
-  static Widget CardTitle (var size, String txt){
+  static Widget Listtile(var size, Articles articles){
     return Container(
-        width: size.width/2,
-        margin:EdgeInsets.only(left:15),
-        child: Text(txt,
-          style: StaticValues.headernews,
-          maxLines: 2,));
-  }
+      height: size.height/7,
+      width: size.width,
+      margin: const EdgeInsets.all(8),
+      child: Row(
+        children: [
+          CardModules.VideoCard(articles.urlToImage==null?StaticValues.defaultimg:articles.urlToImage!),
 
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              CardModules.CardTitle(size, articles.title!),
 
-  static Widget VideoCard(String imgurl){
-    return   Stack(
-      children: [
-        Container(
-          height: 150, // height to container
-          width: 120,  // width to container
-          margin: EdgeInsets.only(left: 15, right: 0),  // margin to container
-          decoration: BoxDecoration(    // decoration to the container
-            color: Colors.grey, // color used
-            borderRadius: BorderRadius.circular(
-                30), // make rounded shape to whole box
-          ),
-          child: ClipRRect( // used to decorate the image
-            borderRadius: BorderRadius.circular(20), // make rounded shape to image only
-            child: Image.network(
-              imgurl,
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-        Positioned(
-            top: 50,
-            left: 60,
-            child: Icon(Icons.play_circle_fill, color: Colors.white, size: 40))
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    height: 35,
+                    width: 90,
+                    margin: EdgeInsets.only(right: 10),
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Center(child: Text(articles.source==null?"snmn.com":articles.source!.name!,style: StaticValues.urlbutton,maxLines: 1,overflow: TextOverflow.ellipsis)),
+                  ),
 
-      ],
+                  Text(articles.publishedAt!,style: const TextStyle(color: Colors.grey,fontSize: 10),)
+                ],
+              )
+            ],
+          )
+
+        ],
+      ),
     );
   }
 }
