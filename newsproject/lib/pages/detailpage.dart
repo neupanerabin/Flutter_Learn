@@ -52,7 +52,7 @@ class DetailPageState extends State<DetailPage>{
                   },
                   child: const Padding(
                     padding: EdgeInsets.all(8.0),
-                    child: Icon(Icons.arrow_back,color: Colors.white,size: 30,),
+                    child: Icon(Icons.arrow_back,color: Colors.white,size: 50,),
                   ),
                 ),
                 const Positioned(

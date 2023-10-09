@@ -3,7 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:newsproject/api/getapi.dart';
 import 'package:newsproject/pages/detailpage.dart';
+import 'package:newsproject/pages/loginpage.dart';
 import 'package:newsproject/static.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../model/newsdata.dart';
 import '../modules/cards.dart';
@@ -33,6 +35,17 @@ class DashboardState extends State<Dashboard>{
     _futurenewsdata = GetApi().getnewsdata();
   }
 
+  logout(context) async{
+    // shared pref data clear
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.clear();
+    // login page
+
+    Navigator.pushAndRemoveUntil(context,
+        MaterialPageRoute(builder: (context)=>loginpage()),
+            (route) => false,);
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -51,51 +64,70 @@ class DashboardState extends State<Dashboard>{
               case ConnectionState.done:
                 if(snapshot.hasData){
                   var newsdata = snapshot.data;
-                  return Column(
-                    children: [
+                  return SingleChildScrollView(
+                    child: Column(
+                      children: [
 
-                      const SizedBox(height: 60,),
-                      Container(
-                        height: size.height/5,
-                        width: size.width/1.02,
-                        child: ListView.builder(
-                          itemCount: newsdata!.articles!.length,
-                          physics: const AlwaysScrollableScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            return GestureDetector(
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const SizedBox(height: 50,),
+                            GestureDetector(
                               onTap: (){
-                                //navigate to new page
-                                navigatetodetail(context,newsdata.articles![index]);
+                                logout(context);
                               },
-                              child: CardModules.Cards(size,
-                                  newsdata.articles![index].title!,
-                                  newsdata.articles![index].publishedAt,
-                                  newsdata.articles![index].urlToImage==null?StaticValues.defaultimg:newsdata.articles![index].urlToImage!),
-                            );
-                          },
+                              child: const Padding(
+                                  padding: EdgeInsets.only(top:50.0, right: 10),
+                              child: Icon(Icons.logout, size:35, color: Colors.black45,),
+                              ),
+                            )
+                          ],
                         ),
-                      ),
-                      Container(
-                          height: size.height/1.5,
-                          width:size.width,
+
+                        const SizedBox(height: 60,),
+                        Container(
+                          height: size.height/5,
+                          width: size.width/1.02,
                           child: ListView.builder(
-                            itemCount: newsdata.articles!.length,
+                            itemCount: newsdata!.articles!.length,
                             physics: const AlwaysScrollableScrollPhysics(),
-                            scrollDirection: Axis.vertical,
-                            itemBuilder: (context,index){
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
                               return GestureDetector(
                                 onTap: (){
                                   //navigate to new page
                                   navigatetodetail(context,newsdata.articles![index]);
                                 },
-                                child: CardModules.Listtile(size,newsdata.articles![index]),
+                                child: CardModules.Cards(size,
+                                    newsdata.articles![index].title!,
+                                    newsdata.articles![index].publishedAt,
+                                    newsdata.articles![index].urlToImage==null?StaticValues.defaultimg:newsdata.articles![index].urlToImage!),
                               );
                             },
-                          )
-                      )
-                    ],
+                          ),
+                        ),
+                        Container(
+                            height: size.height/1.5,
+                            width:size.width,
+                            child: ListView.builder(
+                              itemCount: newsdata.articles!.length,
+                              physics: const AlwaysScrollableScrollPhysics(),
+                              scrollDirection: Axis.vertical,
+                              itemBuilder: (context,index){
+                                return GestureDetector(
+                                  onTap: (){
+                                    //navigate to new page
+                                    navigatetodetail(context,newsdata.articles![index]);
+                                  },
+                                  child: CardModules.Listtile(size,newsdata.articles![index]),
+                                );
+                              },
+                            )
+                        )
+                      ],
+                    ),
                   ); //ui
+
                 }else{
                   return Center(
                     child: Container(
@@ -110,7 +142,8 @@ class DashboardState extends State<Dashboard>{
 
 
             }
-          },),
+          },
+        ),
       ),
     );
   }

@@ -78,7 +78,7 @@ class loginpagestate extends State<loginpage>{
 
                   const Padding(
                     padding: EdgeInsets.all(15.0),
-                    child: Text("Sign in",style: TextStyle(fontSize: 18,color: Colors.black),),
+                    child: Text("Sign in",style: TextStyle(fontSize: 25,color: Colors.black),),
                   ),
 
                   Container(height: 45,width: size.width/1.5,
@@ -89,6 +89,7 @@ class loginpagestate extends State<loginpage>{
                       )
                       ,child: TextField(
                         controller: textcontrolleremail,
+                        style: const TextStyle(fontSize: 25), // fiels text size
                       )
                   ),
 
@@ -100,6 +101,7 @@ class loginpagestate extends State<loginpage>{
                       )
                       ,child: TextField(
                         controller: textcontrollerpsw,
+                        style: const TextStyle(fontSize: 27), // field text size
                         obscureText: true,
                       )
                   ),
@@ -142,7 +144,7 @@ class loginpagestate extends State<loginpage>{
                             child: Center(
                               child: Text("Login".toUpperCase(),
                                 style: const TextStyle(color: Colors.white,
-                                    fontSize: 14,fontWeight: FontWeight.bold),),
+                                    fontSize: 20,fontWeight: FontWeight.bold),),
                             )
                         ) :Container(height: 30,width: 30,
                             child: const CircularProgressIndicator(
